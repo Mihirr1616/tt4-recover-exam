@@ -50,7 +50,6 @@ var app = builder.Build();
 
 // Middleware Configuration
 app.UseCors("AllowAll");
-app.UseCors("AllowAngularApp");
 app.UseAuthentication(); // Ensure authentication is enabled
 app.UseAuthorization();
 
