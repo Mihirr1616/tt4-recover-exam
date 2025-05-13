@@ -16,13 +16,13 @@
 </template>
 
 <script>
-import CourseService from "@/services/course.service";
+import CourseService from '@/services/course.service';
 
 export default {
   data() {
     return {
       courses: [],
-      newCourse: { title: "" }
+      newCourse: { title: '' }
     };
   },
   mounted() {
@@ -32,18 +32,18 @@ export default {
     loadCourses() {
       CourseService.getAll().then((response) => {
         this.courses = response.data;
+      }).catch((error) => {
+        console.error("Error loading courses:", error);
       });
     },
     addCourse() {
       CourseService.create(this.newCourse).then(() => {
         this.loadCourses();
-        this.newCourse = { title: "" };
+        this.newCourse.title = '';
       });
     },
     deleteCourse(id) {
-      CourseService.delete(id).then(() => {
-        this.loadCourses();
-      });
+      CourseService.delete(id).then(() => this.loadCourses());
     }
   }
 };
